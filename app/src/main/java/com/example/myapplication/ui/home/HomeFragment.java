@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,6 +36,14 @@ public class HomeFragment extends Fragment {
 
     private ImageButton add;
 
+    private ImageButton edit;
+
+    private ImageButton validate;
+
+    private int counter = 0;
+
+    private TextView mShowCount;
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -44,8 +55,11 @@ public class HomeFragment extends Fragment {
         ArrayList<String> arrayList = new ArrayList<>();
         Category cat = new Category("Food", Color.alpha(15));
         Habit habit1 = new Habit("Drink Water", 5, cat);
-        arrayList.add(habit1.getName());
+        Habit habit2 = new Habit("Pray", 6, cat);
 
+        Intent i = getActivity().getIntent();
+        Habit habit3 = (Habit) i.getSerializableExtra("Habit");
+        arrayList.add(habit1.getName());
         ArrayAdapter arrayAdapter = new ArrayAdapter(this.getActivity(), R.layout.singlehabit, R.id.textView3, arrayList);
         listHabits.setAdapter(arrayAdapter);
 
@@ -57,7 +71,17 @@ public class HomeFragment extends Fragment {
                 addHabit();
             }
         });
+
+        // Validate a habit
+        View root1 = inflater.inflate(R.layout.singlehabit, container, false);
+        mShowCount = (TextView) root1.findViewById(R.id.counter);
         return root;
+    }
+
+    public void countUp(View view) {
+        counter++;
+        if (mShowCount != null)
+            mShowCount.setText(Integer.toString(counter));
     }
 
     private void addHabit(){
