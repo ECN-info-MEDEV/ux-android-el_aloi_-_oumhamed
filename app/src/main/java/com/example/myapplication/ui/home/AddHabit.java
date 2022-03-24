@@ -1,7 +1,9 @@
 package com.example.myapplication.ui.home;
 
 import android.app.Activity;
-import android.app.FragmentManager;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,17 +11,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.ui.home.HomeFragment;
 
 
 import com.example.myapplication.R;
 
-public class AddHabit extends Activity {
+public class AddHabit extends FragmentActivity {
 
     private ImageButton save;
 
+    private Habit habit;
+
+    private HomeFragment hf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +44,12 @@ public class AddHabit extends Activity {
         EditText number = findViewById(R.id.Numb);
         String habitName = name.getText().toString();
         int num = Integer.parseInt(number.getText().toString());
-        Intent intent = new Intent(this, HomeFragment.class);
-        startActivity(intent);
-        FragmentManager fm = getFragmentManager();
-        HomeFragment myFragment = new HomeFragment();
-        fm.beginTransaction().add(R.id.save, myFragment).commit();
+        habit = new Habit(habitName, num);
+        //Intent intent = new Intent(this, HomeFragment.class);
+        getIntent().putExtra("Habit", habit);
+        FragmentManager fm= getSupportFragmentManager();
+        Fragment f1 = new HomeFragment();
+        fm.beginTransaction().replace(R.id.habit, f1).commit();
+        fm.beginTransaction().setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).show(hf).commit();
     }
 }

@@ -1,7 +1,9 @@
 package com.example.myapplication.ui.home;
 
 
-public class Habit {
+import java.io.Serializable;
+
+public class Habit implements Serializable {
     private String name;
     private int nbfoisParJour;
     private Category category;
