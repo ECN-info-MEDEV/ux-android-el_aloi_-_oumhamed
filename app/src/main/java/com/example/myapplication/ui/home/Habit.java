@@ -6,10 +6,15 @@ public class Habit {
     private int nbfoisParJour;
     private Category category;
 
-    public Habit(String name, int nboisParJour, Category category) {
+    public Habit(String name, int nbfoisParJour, Category category) {
         this.name = name;
         this.nbfoisParJour = nbfoisParJour;
         this.category = category;
+    }
+
+    public Habit(String name, int nbfoisParJour) {
+        this.name = name;
+        this.nbfoisParJour = nbfoisParJour;
     }
 
     public String getName() {

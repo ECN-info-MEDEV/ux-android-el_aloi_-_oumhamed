@@ -23,6 +23,12 @@
             android:name=".MainActivity"
             android:label="Home page" />
 
+        <activity
+            android:name=".ui.home.AddHabit"
+            android:label="Add Habit" />
+
+
+
     </application>
 
 </manifest>

@@ -3,4 +3,6 @@
     <string name="title_home">Habits</string>
     <string name="title_dashboard">Tracking a Habit</string>
     <string name="title_notifications">Progress</string>
+    <string name="new_habit_name">Nom de l\'habitude</string>
+    <string name="nbfoisparjour">Nombre de fois par jour</string>
 </resources>
